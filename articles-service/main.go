@@ -5,13 +5,18 @@ import (
     "log"
     "net/http"
     "encoding/json"
-    "go-playpen/microservice1/representations"
+    articleReps "go-playpen/articles-representations"
+    restReps "go-playpen/rest-representations"
 )
 
-var Articles []representations.Article
+var Articles []articleReps.Article
 
 func root(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "{\"msg\": \"Hello, world!\"}")
+    links := []restReps.Link {
+        restReps.Link{Rel: "getArticles", Method: "get", Uri: "/articles"},
+    }
+    api := restReps.Api{Links: links}
+    json.NewEncoder(w).Encode(api)
     fmt.Println("Endpoint Hit: API Root")
 }
 
@@ -27,8 +32,9 @@ func handleRequests() {
 }
 
 func main() {
-    Articles = []representations.Article {
-        representations.Article{Title: "Hello", Desc: "Article Description", Content: "Article Content"},
+    Articles = []articleReps.Article {
+        articleReps.Article{Title: "Hello", Desc: "Article Description", Content: "Article Content"},
     }
     handleRequests()
 }
+

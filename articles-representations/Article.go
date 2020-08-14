@@ -1,7 +1,7 @@
 package representations
 
 type Article struct {
-    Title string `json:"Title"`
+    Title string `json:"title"`
     Desc string `json:"desc"`
     Content string `json:"content"`
 }
