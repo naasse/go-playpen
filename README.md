@@ -31,8 +31,7 @@ PATH=${PATH}:${GOPATH}/bin
 ## Test Your Install
 
 ```bash
-cd hello
-go build
-./hello
+cd examples/hello
+go run hello.go
 ```
 
