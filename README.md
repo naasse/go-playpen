@@ -1,4 +1,5 @@
 # go-playpen
+
 Playpen for working with Go
 
 ## Setup
@@ -33,5 +34,17 @@ PATH=${PATH}:${GOPATH}/bin
 ```bash
 cd examples/hello
 go run hello.go
+```
+
+## Clone Projects
+
+Run `setup.sh` to clone all microservices and representations.
+
+
+## Run Microservices
+
+```bash
+cd [service]
+go run main.go
 ```
 
