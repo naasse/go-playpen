@@ -13,7 +13,7 @@ var Users []userReps.User
 
 func root(w http.ResponseWriter, r *http.Request) {
     links := []restReps.Link {
-        restReps.Link{Rel: "getUsers", Method: "get", Uri: "/users"},
+        restReps.Link{Rel: "getUsers", Method: http.MethodGet, Uri: "/users"},
     }
     api := restReps.Api{Links: links}
     json.NewEncoder(w).Encode(api)

@@ -1,40 +1,26 @@
 package main
 
 import (
-    "fmt"
     "log"
     "net/http"
-    "encoding/json"
-    articleReps "go-playpen/articles-representations"
-    restReps "go-playpen/rest-representations"
+    "go-playpen/articles-service/controller"
+    "go-playpen/articles-service/constants"
 )
 
-var Articles []articleReps.Article
-
-func root(w http.ResponseWriter, r *http.Request) {
-    links := []restReps.Link {
-        restReps.Link{Rel: "getArticles", Method: "get", Uri: "/articles"},
-    }
-    api := restReps.Api{Links: links}
-    json.NewEncoder(w).Encode(api)
-    fmt.Println("Endpoint Hit: API Root")
+// Define the endpoint handlers
+func addHandlers() {
+    http.HandleFunc(constants.RootUri + "/", controller.GetRoot)
+    http.HandleFunc(constants.GetArticlesFullUri + "/", controller.GetArticles)
 }
 
-func getArticles(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("Endpoint Hit: Articles List")
-    json.NewEncoder(w).Encode(Articles)
-}
-
-func handleRequests() {
-    http.HandleFunc("/", root)
-    http.HandleFunc("/articles", getArticles)
+// Start listening and serving requests
+func start() {
     log.Fatal(http.ListenAndServe(":10000", nil))
 }
 
+// Start the application
 func main() {
-    Articles = []articleReps.Article {
-        articleReps.Article{Title: "Hello", Desc: "Article Description", Content: "Article Content"},
-    }
-    handleRequests()
+    addHandlers()
+    start()
 }
 
