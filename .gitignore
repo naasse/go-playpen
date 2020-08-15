@@ -15,6 +15,8 @@
 rest-representations/
 articles-representations/
 articles-service/
+users-service/
+users-representations/
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
